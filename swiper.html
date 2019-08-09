@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            overflow: hidden;
+        }
+        .box {
+            position: relative;
+            width: 100%;
+            height: 100px;
+            background: peru;
+        }
+        .del{
+            position: absolute;
+            right: 0;
+            width: 80px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            background: red; 
+            transform: translateX(100%);
+        }
+
+        .tran1{
+            animation: trans1 0.5s linear forwards;
+        }
+
+        .tran2{
+            animation: trans2 0.5s linear;
+        }
+
+        @keyframes trans1{
+            to{
+                transform: translateX(0);
+            }
+        }
+        @keyframes trans2{
+            from{
+                transform: translateX(0);
+            }
+            to{
+                transform: translateX(100%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="del">删除</div>
+    </div>
+    <script src="tap.js"></script>
+    <script>
+
+        var box = document.querySelector(".box");
+        var del = document.querySelector(".del");
+
+
+        myTouch.tap(del,function(r){
+            //删除
+            box.remove();
+        })
+
+        myTouch.swiper(box,"left",function(){
+            // 左滑的业务
+            // box.style.backgroundColor = "green";
+            del.classList.add("tran1");
+            del.classList.remove("tran2");
+        })
+
+        myTouch.swiper(box,"right",function(){
+            // 右滑的业务
+            del.classList.add("tran2");
+            del.classList.remove("tran1");
+        })
+
+
+    </script>
+</body>
+
+</html>
